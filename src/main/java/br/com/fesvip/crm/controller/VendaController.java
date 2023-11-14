@@ -1,5 +1,6 @@
 package br.com.fesvip.crm.controller;
 
+import br.com.fesvip.crm.entity.Cliente;
 import br.com.fesvip.crm.entity.Venda;
 import br.com.fesvip.crm.service.VendaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,5 +40,11 @@ public class VendaController {
     public ResponseEntity<Void> deletarVenda(@PathVariable Long id) {
         vendaService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Venda> atualizarCliente(@PathVariable Long id, @RequestBody Venda vendaAtualizado) {
+        Venda vendaAtualizadoSalvo = vendaService.update(id, vendaAtualizado);
+        return new ResponseEntity<>(vendaAtualizadoSalvo, HttpStatus.OK);
     }
 }
