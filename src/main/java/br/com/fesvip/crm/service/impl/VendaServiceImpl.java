@@ -7,13 +7,16 @@ import br.com.fesvip.crm.repository.VendaRepository;
 import br.com.fesvip.crm.service.ClienteService;
 import br.com.fesvip.crm.service.UsuarioService;
 import br.com.fesvip.crm.service.VendaService;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import br.com.fesvip.crm.service.exceptions.EntityNotFoundExceptions;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import org.springframework.data.domain.Pageable;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Service
@@ -53,9 +56,16 @@ public class VendaServiceImpl implements VendaService {
     }
 
     @Override
-    public List<Venda> findAll() {
-        return vendaRepository.findAll();
+    public Page<Venda> findAll(Pageable pageable) {
+        return vendaRepository.findAll(pageable);
     }
+
+    @Override
+    public Page<Venda> findAllLast30Days(Pageable pageable) {
+        LocalDateTime startDate = LocalDateTime.now().minus(30, ChronoUnit.DAYS);
+        return vendaRepository.findByDataAfter(startDate, pageable);
+    }
+
 
     @Override
     public Venda update(Long id, Venda vendaAtualizado) {
