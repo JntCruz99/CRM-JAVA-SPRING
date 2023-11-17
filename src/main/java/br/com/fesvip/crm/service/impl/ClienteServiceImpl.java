@@ -1,12 +1,16 @@
 package br.com.fesvip.crm.service.impl;
 
 import br.com.fesvip.crm.entity.Cliente;
+import br.com.fesvip.crm.entity.Venda;
 import br.com.fesvip.crm.repository.ClienteRepository;
 import br.com.fesvip.crm.service.ClienteService;
 import br.com.fesvip.crm.service.exceptions.EntityNotFoundExceptions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -17,6 +21,7 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public Cliente save(Cliente cliente) {
+        cliente.setData(LocalDateTime.now());
         return clienteRepository.save(cliente);
     }
 
@@ -27,9 +32,10 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public List<Cliente> findAll() {
-        return clienteRepository.findAll();
+    public Page<Cliente> findAll(Pageable pageable) {
+        return clienteRepository.findAll(pageable);
     }
+
 
     @Override
     public Cliente update(Long id, Cliente clienteAtualizado) {

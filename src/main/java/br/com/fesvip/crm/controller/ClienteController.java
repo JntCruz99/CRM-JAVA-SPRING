@@ -1,8 +1,12 @@
 package br.com.fesvip.crm.controller;
 
 import br.com.fesvip.crm.entity.Cliente;
+import br.com.fesvip.crm.entity.Venda;
 import br.com.fesvip.crm.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,10 +33,11 @@ public class ClienteController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Cliente>> obterTodosClientes() {
-        List<Cliente> clientes = clienteService.findAll();
+    public ResponseEntity<Page<Cliente>> obterTodosClientes(@PageableDefault(page = 0, size = 10) Pageable pageable) {
+        Page<Cliente> clientes = clienteService.findAll(pageable);
         return new ResponseEntity<>(clientes, HttpStatus.OK);
     }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<Cliente> atualizarCliente(@PathVariable Long id, @RequestBody Cliente clienteAtualizado) {

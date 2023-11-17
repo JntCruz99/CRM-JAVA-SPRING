@@ -1,9 +1,11 @@
 package br.com.fesvip.crm.controller;
 
 import br.com.fesvip.crm.entity.Venda;
+import br.com.fesvip.crm.entity.enums.Status;
 import br.com.fesvip.crm.service.VendaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -53,5 +55,32 @@ public class VendaController {
     public ResponseEntity<Page<Venda>> obterVendasUltimos30Dias(@PageableDefault(page = 0, size = 10) Pageable pageable) {
         Page<Venda> vendas = vendaService.findAllLast30Days(pageable);
         return new ResponseEntity<>(vendas, HttpStatus.OK);
+    }
+
+    @GetMapping("/last30daysuser")
+    public ResponseEntity<Page<Venda>> userVendasUltimos30Dias(@PageableDefault(page = 0, size = 10) Pageable pageable) {
+        Page<Venda> vendas = vendaService.findAllLast30DaysByUser(pageable);
+        return new ResponseEntity<>(vendas, HttpStatus.OK);
+    }
+
+    @GetMapping("/pendentes")
+    public ResponseEntity<Page<Venda>> obterVendasPendentes(@RequestParam(defaultValue = "0") int page,
+                                                            @RequestParam(defaultValue = "10") int size) {
+        Page<Venda> vendasPendentes = vendaService.findByStatus(Status.PENDENTE, PageRequest.of(page, size));
+        return new ResponseEntity<>(vendasPendentes, HttpStatus.OK);
+    }
+
+    @GetMapping("/convertidos")
+    public ResponseEntity<Page<Venda>> obterVendasConvertido(@RequestParam(defaultValue = "0") int page,
+                                                            @RequestParam(defaultValue = "10") int size) {
+        Page<Venda> vendasPendentes = vendaService.findByStatus(Status.CONVERTIDO, PageRequest.of(page, size));
+        return new ResponseEntity<>(vendasPendentes, HttpStatus.OK);
+    }
+
+    @GetMapping("/nao-convertidos")
+    public ResponseEntity<Page<Venda>> obterVendasNaoConvertido(@RequestParam(defaultValue = "0") int page,
+                                                             @RequestParam(defaultValue = "10") int size) {
+        Page<Venda> vendasPendentes = vendaService.findByStatus(Status.NAO_CONVERTIDO, PageRequest.of(page, size));
+        return new ResponseEntity<>(vendasPendentes, HttpStatus.OK);
     }
 }
