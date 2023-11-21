@@ -18,4 +18,6 @@ public interface ClienteService {
     Cliente update(Long id, Cliente clienteAtualizado);
 
     void delete(Long id);
+
+    Page<Cliente> findByNomeOrNumeroTelefoneOrEmail(String searchTerm, Pageable pageable);
 }

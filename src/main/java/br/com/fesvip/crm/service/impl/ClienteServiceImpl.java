@@ -60,4 +60,9 @@ public class ClienteServiceImpl implements ClienteService {
 
         clienteRepository.delete(cliente);
     }
+
+    @Override
+    public Page<Cliente> findByNomeOrNumeroTelefoneOrEmail(String searchTerm, Pageable pageable) {
+        return clienteRepository.findByNomeOrNumeroTelefoneOrEmail(searchTerm, pageable);
+    }
 }

@@ -50,4 +50,13 @@ public class ClienteController {
         clienteService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<Page<Cliente>> searchClientes(
+            @RequestParam(required = false) String searchTerm,
+            @PageableDefault(page = 0, size = 10) Pageable pageable
+    ) {
+        Page<Cliente> clientes = clienteService.findByNomeOrNumeroTelefoneOrEmail(searchTerm, pageable);
+        return new ResponseEntity<>(clientes, HttpStatus.OK);
+    }
 }
