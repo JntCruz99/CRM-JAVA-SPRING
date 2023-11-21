@@ -2,7 +2,7 @@ name: Deploy CRM-FESVIP
 
 on:
   push:
-    branches: [main]
+    branches: [master]
 
 jobs:
   build:
