@@ -32,6 +32,10 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
+    public Page<Cliente> findAllOrderByDataDesc(Pageable pageable) {
+        return clienteRepository.findAllByOrderByDataDesc(pageable);
+    }
+    @Override
     public Page<Cliente> findAll(Pageable pageable) {
         return clienteRepository.findAll(pageable);
     }

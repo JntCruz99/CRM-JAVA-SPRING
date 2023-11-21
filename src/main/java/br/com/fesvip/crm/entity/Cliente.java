@@ -27,6 +27,7 @@ public class Cliente {
 
     private String plataforma;
 
+
     @Email
     private String email;
 

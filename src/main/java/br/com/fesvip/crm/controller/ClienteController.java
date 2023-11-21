@@ -38,6 +38,11 @@ public class ClienteController {
         return new ResponseEntity<>(clientes, HttpStatus.OK);
     }
 
+    @GetMapping("/recentes")
+    public ResponseEntity<Page<Cliente>> obterTodosClientesRecentes(@PageableDefault(page = 0, size = 10) Pageable pageable) {
+        Page<Cliente> clientes = clienteService.findAllOrderByDataDesc(pageable);
+        return new ResponseEntity<>(clientes, HttpStatus.OK);
+    }
 
     @PutMapping("/{id}")
     public ResponseEntity<Cliente> atualizarCliente(@PathVariable Long id, @RequestBody Cliente clienteAtualizado) {
