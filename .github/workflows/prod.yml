@@ -30,6 +30,6 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: pull image from docker hub
-        run: docker pull jntcruz/crm
+        run: sudo docker pull jntcruz/crm
       - name: Run docker container
-        run: docker run -d -p 8080:8080 -e DATABASE_USERNAME=${{secrets.DATABASE_USERNAME}} -e DATABASE_PASSWORD='${{secrets.DATABASE_PASSWORD}}' -e DATABASE_URL=${{secrets.DATABASE_URL}} --name crm jntcruz/crm
+        run: sudo docker run -d -p 8080:8080 -e DATABASE_USERNAME=${{secrets.DATABASE_USERNAME}} -e DATABASE_PASSWORD='${{secrets.DATABASE_PASSWORD}}' -e DATABASE_URL=${{secrets.DATABASE_URL}} --name crm jntcruz/crm
