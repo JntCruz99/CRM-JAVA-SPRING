@@ -30,7 +30,7 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: pull image from docker hub
-        run: docker pull jntcruz/crm:latest
+        run: docker pull jntcruz/crm
       - name: Remover docker
         run: docker rm -f crm
       - name: Run docker container
