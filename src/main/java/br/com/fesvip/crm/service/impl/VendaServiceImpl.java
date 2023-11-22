@@ -89,7 +89,7 @@ public class VendaServiceImpl implements VendaService {
         Venda vendaExistente = vendaRepository.findById(id).orElseThrow(
                 () -> new EntityNotFoundExceptions("Id Não encontrado: " + id));
 
-        vendaExistente.setData(LocalDateTime.now());
+
         vendaExistente.setStatus(vendaAtualizado.getStatus());
         vendaExistente.setObs(vendaAtualizado.getObs());
         vendaExistente.setCurso(vendaAtualizado.getCurso());
