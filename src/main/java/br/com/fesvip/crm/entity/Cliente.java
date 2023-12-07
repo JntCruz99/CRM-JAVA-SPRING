@@ -36,4 +36,6 @@ public class Cliente {
     @NotNull
     private LocalDateTime data;
 
+    @OneToOne(mappedBy = "cliente", cascade = CascadeType.ALL)
+    private Chat chat;
 }
