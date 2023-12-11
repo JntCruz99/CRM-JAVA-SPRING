@@ -6,13 +6,14 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
 @Entity
 @Table(name = "tb_cliente")
-public class Cliente {
+public class Cliente implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -6,13 +6,14 @@ import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
 @Data
 @Entity
 @Table(name = "tb_usuario")
-public class Usuario implements UserDetails {
+public class Usuario implements UserDetails, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,6 +29,9 @@ public class Usuario implements UserDetails {
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<Venda> vendas;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<Mensagem> mensagens;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

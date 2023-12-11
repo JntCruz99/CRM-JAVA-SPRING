@@ -8,12 +8,13 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
 @Entity
 @Table(name = "tb_venda")
-public class Venda {
+public class Venda implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
