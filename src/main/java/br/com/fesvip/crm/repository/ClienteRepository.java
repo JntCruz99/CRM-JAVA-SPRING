@@ -14,5 +14,8 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
     @Query("SELECT c FROM Cliente c WHERE LOWER(c.nome) LIKE LOWER(CONCAT('%', :searchTerm, '%')) OR LOWER(c.numeroTelefone1) LIKE LOWER(CONCAT('%', :searchTerm, '%')) OR LOWER(c.numeroTelefone2) LIKE LOWER(CONCAT('%', :searchTerm, '%')) OR LOWER(c.email) LIKE LOWER(CONCAT('%', :searchTerm, '%'))")
     Page<Cliente> findByNomeOrNumeroTelefoneOrEmail(String searchTerm, Pageable pageable);
 
+    @Query("SELECT c.chat.id FROM Cliente c WHERE c.id = :clienteId")
+    Long findChatIdByClienteId(Long clienteId);
+
     Page<Cliente> findAllByOrderByDataDesc(Pageable pageable);
 }

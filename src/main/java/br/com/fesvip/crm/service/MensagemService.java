@@ -5,7 +5,7 @@ import br.com.fesvip.crm.entity.Mensagem;
 import java.util.List;
 
 public interface MensagemService {
-    Mensagem save(Mensagem mensagem, Long chatId);
+    Mensagem save(Mensagem mensagem, Long clienteId);
 
     Mensagem findById(Long id);
 

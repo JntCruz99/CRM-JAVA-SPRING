@@ -2,6 +2,7 @@ package br.com.fesvip.crm.service.impl;
 
 import br.com.fesvip.crm.entity.Chat;
 import br.com.fesvip.crm.repository.ChatRepository;
+import br.com.fesvip.crm.repository.ClienteRepository;
 import br.com.fesvip.crm.service.ChatService;
 import br.com.fesvip.crm.service.exceptions.EntityNotFoundExceptions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,15 +15,19 @@ public class ChatServiceImpl implements ChatService {
 
     @Autowired
     private ChatRepository chatRepository;
+
+    @Autowired
+    private ClienteRepository clienteRepository;
+
     @Override
     public Chat save(Chat chat) {
         return chatRepository.save(chat);
     }
 
     @Override
-    public Chat findById(Long id) {
-        return chatRepository.findById(id).orElseThrow(
-                () -> new EntityNotFoundExceptions("Id Não encontrado: " + id));
+    public Chat findById(Long clienteId) {
+        return clienteRepository.findChatIdByClienteId(clienteId).orElseThrow(
+                () -> new EntityNotFoundExceptions("Id Não encontrado: " + clienteId));
     }
 
     @Override

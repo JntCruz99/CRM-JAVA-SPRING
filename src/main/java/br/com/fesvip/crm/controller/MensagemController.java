@@ -21,9 +21,9 @@ public class MensagemController {
         this.mensagemService = mensagemService;
     }
 
-    @PostMapping("/{chatId}")
-    public ResponseEntity<Mensagem> save(@RequestBody Mensagem mensagem, @PathVariable Long chatId) {
-        Mensagem savedMensagem = mensagemService.save(mensagem, chatId);
+    @PostMapping("/{clienteId}")
+    public ResponseEntity<Mensagem> save(@RequestBody Mensagem mensagem, @PathVariable Long clienteId) {
+        Mensagem savedMensagem = mensagemService.save(mensagem, clienteId);
         return new ResponseEntity<>(savedMensagem, HttpStatus.CREATED);
     }
 

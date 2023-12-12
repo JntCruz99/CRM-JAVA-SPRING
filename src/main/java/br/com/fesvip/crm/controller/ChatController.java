@@ -26,9 +26,9 @@ public class ChatController {
         return new ResponseEntity<>(savedChat, HttpStatus.CREATED);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Chat> findById(@PathVariable Long id) {
-        Chat chat = chatService.findById(id);
+    @GetMapping("/{clienteId}")
+    public ResponseEntity<Chat> findById(@PathVariable Long clienteId) {
+        Chat chat = chatService.findById(clienteId);
         return new ResponseEntity<>(chat, HttpStatus.OK);
     }
 

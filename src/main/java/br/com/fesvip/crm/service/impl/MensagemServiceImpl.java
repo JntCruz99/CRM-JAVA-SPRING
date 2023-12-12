@@ -3,6 +3,7 @@ package br.com.fesvip.crm.service.impl;
 import br.com.fesvip.crm.entity.Chat;
 import br.com.fesvip.crm.entity.Mensagem;
 import br.com.fesvip.crm.entity.Usuario;
+import br.com.fesvip.crm.repository.ClienteRepository;
 import br.com.fesvip.crm.repository.MensagemRepository;
 import br.com.fesvip.crm.service.ChatService;
 import br.com.fesvip.crm.service.MensagemService;
@@ -28,8 +29,13 @@ public class MensagemServiceImpl implements MensagemService {
     @Autowired
     private UsuarioService usuarioService;
 
+    @Autowired
+    private ClienteRepository clienteRepository;
+
     @Override
-    public Mensagem save(Mensagem mensagem, Long chatId) {
+    public Mensagem save(Mensagem mensagem, Long clienteId) {
+
+        Long chatId = clienteRepository.findChatIdByClienteId(clienteId);
 
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = userDetails.getUsername();
