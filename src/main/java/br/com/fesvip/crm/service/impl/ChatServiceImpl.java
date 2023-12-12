@@ -5,9 +5,11 @@ import br.com.fesvip.crm.repository.ChatRepository;
 import br.com.fesvip.crm.service.ChatService;
 import br.com.fesvip.crm.service.exceptions.EntityNotFoundExceptions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ChatServiceImpl implements ChatService {
 
     @Autowired

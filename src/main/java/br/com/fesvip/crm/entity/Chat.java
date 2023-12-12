@@ -1,5 +1,6 @@
 package br.com.fesvip.crm.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -18,6 +19,7 @@ public class Chat implements Serializable {
 
     @OneToOne
     @JoinColumn(name = "cliente_id")
+    @JsonIgnore
     private Cliente cliente;
 
     @OneToMany(mappedBy = "chat", cascade = CascadeType.ALL)

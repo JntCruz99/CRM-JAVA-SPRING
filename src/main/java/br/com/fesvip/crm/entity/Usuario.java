@@ -1,5 +1,6 @@
 package br.com.fesvip.crm.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
@@ -31,6 +32,7 @@ public class Usuario implements UserDetails, Serializable {
     private List<Venda> vendas;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Mensagem> mensagens;
 
     @Override

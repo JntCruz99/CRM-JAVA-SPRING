@@ -23,6 +23,8 @@ public class Mensagem implements Serializable {
 
     private LocalDateTime data;
 
+    //ta bom
+
     @ManyToOne
     @JsonIgnore
     private Chat chat;

@@ -1,8 +1,10 @@
 package br.com.fesvip.crm.service.impl;
 
+import br.com.fesvip.crm.entity.Chat;
 import br.com.fesvip.crm.entity.Cliente;
 import br.com.fesvip.crm.entity.Venda;
 import br.com.fesvip.crm.repository.ClienteRepository;
+import br.com.fesvip.crm.service.ChatService;
 import br.com.fesvip.crm.service.ClienteService;
 import br.com.fesvip.crm.service.exceptions.EntityNotFoundExceptions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +21,17 @@ public class ClienteServiceImpl implements ClienteService {
     @Autowired
     private ClienteRepository clienteRepository;
 
+    @Autowired
+    private ChatService chatService;
+
     @Override
     public Cliente save(Cliente cliente) {
+        Chat chat = new Chat();
+
+
+        cliente.setChat(chat);
         cliente.setData(LocalDateTime.now());
+        chat.setCliente(cliente);
         return clienteRepository.save(cliente);
     }
 
